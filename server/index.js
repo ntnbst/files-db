@@ -48,23 +48,15 @@ async function writeDataToFile(dataToWrite) {
 
 async function addUserToDb(newUser) {
   const users = await readDataFromFile();
-
   const parsedJson = JSON.parse(users);
-
-  console.log(parsedJson);
-
   parsedJson.push(newUser);
-
   writeDataToFile(parsedJson);
-
   return parsedJson;
 }
 
 async function removeUser(userId) {
   const users = await readDataFromFile();
-
   const parsedJson = JSON.parse(users);
-
   const udpatedList = parsedJson.filter((user) => user.id !== userId);
   writeDataToFile(udpatedList);
   return udpatedList;
@@ -116,6 +108,21 @@ app.patch("/update-user/:userId", async (req, res) => {
   res.send(clone);
 });
 
+// app.post("/register", async (req, res) => {
+//   const userName = req?.body.userName;
+//   const password = req?.body.password;
+//   const email = req?.body.email;
+
+//   // take use of db/users
+//   // add a new entry of user with a unique id
+//   //
+
+// });
+
 app.listen("6000", () => {
   console.log("app is running at port 6000");
 });
+
+// new user comes up
+// we assign them an id
+// we create data in format -> <id>_employees_list, <id>_projects
